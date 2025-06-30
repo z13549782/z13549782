@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雅安市第二人民医院老年科 | 透析导管固定防护指南</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+            color: #fff;
+            position: relative;
+        }
+        
+        /* 科技感背景层 */
+        .background-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #00a8c5, #006e82, #005f6b);
+            transition: background 10s ease-in-out;
+            overflow: hidden;
+        }
+        
+        /* 六边形网格 */
+        .hex-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+            background-image: 
+                radial-gradient(circle at center, rgba(0, 255, 255, 0.1) 0%, transparent 70%),
+                repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(0, 217, 255, 0.1) 20px),
+                repeating-linear-gradient(120deg, transparent, transparent 19px, rgba(0, 217, 255, 0.1) 20px),
+                repeating-linear-gradient(240deg, transparent, transparent 19px, rgba(0, 217, 255, 0.1) 20px);
+        }
+        
+        /* 动态线条 */
+        .dynamic-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
+            height: 1px;
+            transform-origin: left;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: rgba(0, 30, 40, 0.7);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            animation: headerGlow 3s linear infinite;
+        }
+        
+        @keyframes headerGlow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+            color: #ffffff;
+            background: linear-gradient(90deg, #ffffff, #a0ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #c0ffff;
+            line-height: 1.6;
+            text-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
+        }
+        
+        .content {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .animation-section {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(0, 40, 50, 0.7);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .info-section {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(0, 20, 30, 0.7);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 200, 255, 0.3);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #4ff0ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
+        }
+        
+        .section-title i {
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+        
+        .animation-container {
+            position: relative;
+            height: 400px;
+            background: rgba(0, 30, 40, 0.5);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: inset 0 0 20px rgba(0, 150, 255, 0.3), 0 0 20px rgba(0, 100, 150, 0.3);
+        }
+        
+        .scene-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .scene-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #00a8c5, #007a8a);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 150, 200, 0.4);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scene-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .scene-btn:hover::before {
+            left: 100%;
+        }
+        
+        .scene-btn:hover {
+            background: linear-gradient(135deg, #00c5e0, #008a9a);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 180, 230, 0.6);
+        }
+        
+        .scene-btn.active {
+            background: linear-gradient(135deg, #00e0ff, #00a0b0);
+            color: #002b36;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+        }
+        
+        .animation-description {
+            background: rgba(0, 60, 80, 0.3);
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            min-height: 150px;
+            border: 1px solid rgba(0, 200, 255, 0.2);
+        }
+        
+        .tip-card {
+            background: rgba(0, 60, 80, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #00e0ff;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tip-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(transparent, #00e0ff, transparent);
+            opacity: 0.5;
+        }
+        
+        .tip-card:hover {
+            transform: translateX(10px);
+            background: rgba(0, 80, 100, 0.5);
+            box-shadow: 0 5px 15px rgba(0, 200, 255, 0.3);
+        }
+        
+        .tip-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #4ff0ff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px rgba(0, 200, 255, 0.5);
+        }
+        
+        .tip-card p {
+            line-height: 1.6;
+            color: #d0ffff;
+        }
+        
+        .warning {
+            background: rgba(200, 100, 0, 0.2);
+            border-left: 4px solid #ffaa00;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .warning::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(transparent, #ffaa00, transparent);
+            opacity: 0.5;
+        }
+        
+        .warning h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 5px rgba(255, 200, 0, 0.5);
+        }
+        
+        .warning ul {
+            padding-left: 25px;
+        }
+        
+        .warning li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #ffffd0;
+        }
+        
+        /* Animation Elements */
+        .person {
+            position: absolute;
+            width: 120px;
+            height: 250px;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        
+        .head {
+            width: 70px;
+            height: 70px;
+            background: #ffccbc;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 25px;
+            z-index: 10;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .body {
+            position: absolute;
+            top: 70px;
+            left: 40px;
+            width: 40px;
+            height: 100px;
+            background: #2196f3;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .arm {
+            position: absolute;
+            width: 20px;
+            height: 80px;
+            background: #2196f3;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .left-arm {
+            top: 70px;
+            left: 15px;
+            transform-origin: top center;
+        }
+        
+        .right-arm {
+            top: 70px;
+            left: 85px;
+            transform-origin: top center;
+        }
+        
+        .leg {
+            position: absolute;
+            width: 20px;
+            height: 90px;
+            background: #1565c0;
+            border-radius: 10px 10px 0 0;
+            top: 170px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .left-leg {
+            left: 40px;
+        }
+        
+        .right-leg {
+            left: 60px;
+        }
+        
+        .catheter {
+            position: absolute;
+            width: 4px;
+            height: 40px;
+            background: #f44336;
+            top: 90px;
+            left: 60px;
+            z-index: 5;
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+        
+        .catheter-tip {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #d32f2f;
+            border-radius: 50%;
+            top: 85px;
+            left: 55px;
+            z-index: 5;
+            box-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+        }
+        
+        .catheter-tube {
+            position: absolute;
+            width: 100px;
+            height: 8px;
+            background: #f44336;
+            top: 100px;
+            left: 60px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+        
+        .dressing {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #e0f7fa;
+            border-radius: 10px;
+            top: 85px;
+            left: 40px;
+            z-index: 4;
+            border: 2px dashed #80deea;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .shirt {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: #e3f2fd;
+            top: 70px;
+            left: 25px;
+            z-index: 3;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .bed {
+            position: absolute;
+            width: 300px;
+            height: 100px;
+            background: #5d4037;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .pillow {
+            position: absolute;
+            width: 80px;
+            height: 40px;
+            background: #ffcc80;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 科技感装饰 */
+        .tech-corner {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .tech-corner::before, .tech-corner::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00ffff;
+        }
+        
+        .corner-tl {
+            top: 20px;
+            left: 20px;
+        }
+        
+        .corner-tl::before {
+            top: 0;
+            left: 0;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .corner-tl::after {
+            bottom: 0;
+            right: 0;
+            border-left: none;
+            border-top: none;
+        }
+        
+        .corner-tr {
+            top: 20px;
+            right: 20px;
+        }
+        
+        .corner-tr::before {
+            top: 0;
+            right: 0;
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .corner-tr::after {
+            bottom: 0;
+            left: 0;
+            border-right: none;
+            border-top: none;
+        }
+        
+        .corner-bl {
+            bottom: 20px;
+            left: 20px;
+        }
+        
+        .corner-bl::before {
+            bottom: 0;
+            left: 0;
+            border-right: none;
+            border-top: none;
+        }
+        
+        .corner-bl::after {
+            top: 0;
+            right: 0;
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .corner-br {
+            bottom: 20px;
+            right: 20px;
+        }
+        
+        .corner-br::before {
+            bottom: 0;
+            right: 0;
+            border-left: none;
+            border-top: none;
+        }
+        
+        .corner-br::after {
+            top: 0;
+            left: 0;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        /* Animation Keyframes */
+        @keyframes dress-right-arm {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-120deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        @keyframes dress-left-arm {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(120deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        @keyframes undress-right-arm {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-120deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        @keyframes undress-left-arm {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(120deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        @keyframes sleep-turn {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-70deg); }
+        }
+        
+        @keyframes lineAnimation {
+            0% { transform: translateX(-100%) rotate(0deg); }
+            100% { transform: translateX(100%) rotate(360deg); }
+        }
+        
+        .scene-1 .right-arm {
+            animation: dress-right-arm 3s ease-in-out infinite;
+        }
+        
+        .scene-1 .left-arm {
+            animation: dress-left-arm 3s ease-in-out infinite;
+        }
+        
+        .scene-2 .right-arm {
+            animation: undress-right-arm 3s ease-in-out infinite;
+        }
+        
+        .scene-2 .left-arm {
+            animation: undress-left-arm 3s ease-in-out infinite;
+        }
+        
+        .scene-3 .person {
+            animation: sleep-turn 4s ease-in-out infinite alternate;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .animation-container {
+                height: 300px;
+            }
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #bbffff;
+            font-size: 0.9rem;
+            background: rgba(0, 30, 40, 0.7);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景层 -->
+    <div class="background-layer">
+        <div class="hex-grid"></div>
+        <div class="dynamic-lines" id="dynamicLines"></div>
+    </div>
+    
+    <div class="container">
+        <!-- 科技感装饰 -->
+        <div class="tech-corner corner-tl"></div>
+        <div class="tech-corner corner-tr"></div>
+        <div class="tech-corner corner-bl"></div>
+        <div class="tech-corner corner-br"></div>
+        
+        <header>
+            <h1><i class="fas fa-shield-alt"></i> 雅安市第二人民医院老年科<br>透析导管固定防护指南</h1>
+            <p class="subtitle">预防导管滑脱的日常护理措施与注意事项</p>
+        </header>
+        
+        <div class="content">
+            <div class="animation-section">
+                <h2 class="section-title"><i class="fas fa-film"></i> 防护措施演示</h2>
+                
+                <div class="animation-container">
+                    <div class="person">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="left-arm arm"></div>
+                        <div class="right-arm arm"></div>
+                        <div class="left-leg leg"></div>
+                        <div class="right-leg leg"></div>
+                        <div class="catheter"></div>
+                        <div class="catheter-tip"></div>
+                        <div class="catheter-tube"></div>
+                        <div class="dressing"></div>
+                        <div class="shirt"></div>
+                    </div>
+                    <div class="bed">
+                        <div class="pillow"></div>
+                    </div>
+                </div>
+                
+                <div class="scene-controls">
+                    <button class="scene-btn active" data-scene="1">穿衣方法</button>
+                    <button class="scene-btn" data-scene="2">脱衣方法</button>
+                    <button class="scene-btn" data-scene="3">睡姿调整</button>
+                </div>
+                
+                <div class="animation-description">
+                    <p><strong>正确穿衣方法演示：</strong> 穿衣服时，应先穿置管侧手臂，再穿另一侧手臂。本动画展示了正确的穿衣顺序，避免对导管造成牵拉。注意保持动作轻柔，防止导管移位。</p>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> 导管防护要点</h2>
+                
+                <div class="tip-card">
+                    <h3><i class="fas fa-tshirt"></i> 衣物选择与穿着技巧</h3>
+                    <p>选择前开扣或宽松的衣物，避免套头衫。穿着时先穿置管侧手臂，再穿另一侧；脱衣时先脱非置管侧，再脱置管侧。使用导管保护套固定导管，避免被衣物勾到。</p>
+                </div>
+                
+                <div class="tip-card">
+                    <h3><i class="fas fa-bed"></i> 睡眠姿势调整</h3>
+                    <p>避免向置管侧侧卧，防止压迫导管。可使用枕头支撑身体，保持平卧或向对侧卧位。睡前检查导管固定情况，避免导管缠绕或被身体压住。</p>
+                </div>
+                
+                <div class="tip-card">
+                    <h3><i class="fas fa-walking"></i> 日常活动注意事项</h3>
+                    <p>置管侧手臂避免高举、提重物或剧烈活动。颈内静脉导管患者避免突然转头，股静脉导管患者避免深蹲、盘腿坐。注意导管长度变化，发现异常立即报告医护人员。</p>
+                </div>
+                
+                <div class="warning">
+                    <h3><i class="fas fa-exclamation-triangle"></i> 紧急情况处理</h3>
+                    <ul>
+                        <li>如发现导管移位或部分脱出，立即用无菌纱布按压穿刺点</li>
+                        <li>保持按压姿势，避免活动，立即联系医护人员</li>
+                        <li>如导管完全脱出，将导管一起带到医院</li>
+                        <li>切勿尝试将滑出的导管重新插入体内</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>重要提示：本演示仅用于教育目的，具体护理措施请遵循医护人员指导<br>雅安市第二人民医院老年科制作</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sceneBtns = document.querySelectorAll('.scene-btn');
+            const animationContainer = document.querySelector('.animation-container');
+            const description = document.querySelector('.animation-description p');
+            const bgLayer = document.querySelector('.background-layer');
+            const dynamicLines = document.getElementById('dynamicLines');
+            
+            // 场景描述文本
+            const sceneDescriptions = [
+                "穿衣服时，应先穿置管侧手臂，再穿另一侧手臂，避免对导管造成牵拉。注意保持动作轻柔，防止导管移位。",
+                "脱衣服时，应先脱非置管侧手臂，再脱置管侧手臂，避免在脱衣过程中拉扯到导管，降低滑脱风险。",
+                "睡眠时应避免向置管侧侧卧，保持平卧或向对侧卧位，以及使用枕头支撑的正确睡姿，减少导管受压风险。"
+            ];
+            
+            sceneBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 移除所有按钮的active类
+                    sceneBtns.forEach(b => b.classList.remove('active'));
+                    // 给当前按钮添加active类
+                    this.classList.add('active');
+                    
+                    // 获取场景编号
+                    const scene = this.dataset.scene;
+                    
+                    // 更新动画容器类
+                    animationContainer.className = 'animation-container';
+                    animationContainer.classList.add(`scene-${scene}`);
+                    
+                    // 更新描述文本
+                    description.innerHTML = `<strong>${this.textContent}演示：</strong> ${sceneDescriptions[scene-1]}`;
+                });
+            });
+            
+            // 创建动态线条
+            function createDynamicLines() {
+                for (let i = 0; i < 15; i++) {
+                    const line = document.createElement('div');
+                    line.classList.add('line');
+                    
+                    // 随机位置和角度
+                    const top = Math.random() * 100;
+                    const left = Math.random() * 100;
+                    const width = Math.random() * 200 + 100;
+                    const angle = Math.random() * 360;
+                    const delay = Math.random() * 5;
+                    const duration = Math.random() * 10 + 10;
+                    
+                    line.style.top = `${top}%`;
+                    line.style.left = `${left}%`;
+                    line.style.width = `${width}px`;
+                    line.style.transform = `rotate(${angle}deg)`;
+                    line.style.animation = `lineAnimation ${duration}s linear ${delay}s infinite`;
+                    
+                    dynamicLines.appendChild(line);
+                }
+            }
+            
+            // 随机渐变背景
+            function changeBackground() {
+                const hue1 = Math.floor(Math.random() * 60) + 160;
+                const hue2 = Math.floor(Math.random() * 60) + 160;
+                const hue3 = Math.floor(Math.random() * 60) + 160;
+                
+                const saturation1 = Math.floor(Math.random() * 30) + 70;
+                const saturation2 = Math.floor(Math.random() * 30) + 70;
+                const saturation3 = Math.floor(Math.random() * 30) + 70;
+                
+                const lightness1 = Math.floor(Math.random() * 20) + 30;
+                const lightness2 = Math.floor(Math.random() * 20) + 40;
+                const lightness3 = Math.floor(Math.random() * 20) + 30;
+                
+                const color1 = `hsl(${hue1}, ${saturation1}%, ${lightness1}%)`;
+                const color2 = `hsl(${hue2}, ${saturation2}%, ${lightness2}%)`;
+                const color3 = `hsl(${hue3}, ${saturation3}%, ${lightness3}%)`;
+                
+                bgLayer.style.background = `linear-gradient(135deg, ${color1}, ${color2}, ${color3})`;
+            }
+            
+            // 初始化
+            createDynamicLines();
+            changeBackground();
+            
+            // 每20秒改变一次背景
+            setInterval(changeBackground, 20000);
+        });
+    </script>
+</body>
+</html>
